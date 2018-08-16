@@ -1,14 +1,14 @@
 var a="AB##C#DE##F##"
 var NodeList=[] //用来储存二叉树的节点
 var totpoint=0 //用来记录节点的数量
+var Sai=0;//表示处理到给出字符串的第几个
+var Sa="ABDG##H###CE#I##F##"//按照前序给出的字符串，不足的补#
+// var Sa="A#BCD##E###"
 function Node(l,r,nodevalue){
     this.l=l;
     this.r=r;
     this.nodevalue =nodevalue;
 }
-Sa="ABDG##H###CE#I##F##"
-// Sa="A#BCD##E###"
-Sai=0;
 function creatBinTree(now) {
     var x
     x=Sa[Sai]
@@ -35,6 +35,34 @@ function creatBinTree(now) {
 
     }
 }
-
+function preOrder(root){
+    console.log(NodeList[root].nodevalue);
+    if (NodeList[root].l!=-1)
+        preOrder( NodeList[root].l)
+    if (NodeList[root].r!=-1)
+        preOrder( NodeList[root].r)
+}
+function inOrder(root){
+    if (NodeList[root].l!=-1){
+        inOrder(NodeList[root].l)
+    }
+    console.log(NodeList[root].nodevalue)
+    if (NodeList[root].r!=-1)
+        inOrder( NodeList[root].r)
+}
+function postOrder(root){
+    if (NodeList[root].l!=-1)
+        postOrder(NodeList[root].l)
+    if (NodeList[root].r!=-1)
+        postOrder(NodeList[root].r)
+    console.log(NodeList[root].nodevalue)
+}
 creatBinTree(totpoint)
+console.log('下面开始前序遍历')
+preOrder(0)
+console.log('下面开始中序遍历')
+inOrder(0)
+console.log('下面开始后序遍历')
+postOrder(0)
+
 console.log(NodeList)
