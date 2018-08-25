@@ -35,6 +35,7 @@ function creatBinTree(now) {
 
     }
 }
+//下面三个是递归遍历
 function preOrder(root){
     console.log(NodeList[root].nodevalue);
     if (NodeList[root].l!=-1)
@@ -57,12 +58,42 @@ function postOrder(root){
         postOrder(NodeList[root].r)
     console.log(NodeList[root].nodevalue)
 }
+//下面两个是非递归访问
+function nonRPreOrder(){
+    var S=Array();//Stack,储存指针（Nodelist的下标）
+    S[0]=0;
+    while  (S.length>0){
+        x=S.pop() //返回栈顶元素的指针
+        // console.log(S)
+        console.log(NodeList[x].nodevalue)
+        if (NodeList[x].r!=-1) S.push(NodeList[x].r);//右指针入栈，是因为先入栈的后出栈
+        if (NodeList[x].l!=-1) S.push(NodeList[x].l);//左指针入栈
+
+    }
+}
+function nonRInOrder(){
+    var S=Array()
+    var pointer=0
+    do{
+        while (pointer!=-1){
+            S.push(pointer)
+            pointer=NodeList[pointer].l
+        }
+        var x=S.pop()
+        console.log(NodeList[x].nodevalue)
+        if (NodeList[x].r!=-1){
+            pointer=NodeList[x].r
+        }
+
+    }
+    while (S.length>0||pointer!=-1)
+}
+
 creatBinTree(totpoint)
+console.log(NodeList)
 console.log('下面开始前序遍历')
 preOrder(0)
 console.log('下面开始中序遍历')
 inOrder(0)
 console.log('下面开始后序遍历')
 postOrder(0)
-
-console.log(NodeList)
